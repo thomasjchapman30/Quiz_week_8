@@ -4,17 +4,20 @@ import sqlite3
 conn = sqlite3.connect('climate.db')
 cursor = conn.cursor()
 
+cursor.execute("SELECT year, co2, temp FROM climate_data ORDER by year")
+
 data = cursor.fetchall()
-for row in data:
-    years.append(row[0])
-    co2.append(row[1])
-    temp.append(row[2])
 
 conn.close()
 
 years = []
 co2 = []
 temp = []
+
+for row in data:
+    years.append(row[0])
+    co2.append(row[1])
+    temp.append(row[2])
 
 plt.subplot(2, 1, 1)
 plt.plot(years, co2, 'b--') 
